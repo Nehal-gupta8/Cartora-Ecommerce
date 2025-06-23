@@ -2,7 +2,6 @@
 
 A modern shopping cart built with React, Context API, and Clerk authentication. Features geolocation-based address auto-fill, persistent cart storage, and responsive design.
 
-![Demo Screenshot](./screenshots/cart-demo.png) *(Replace with your actual screenshot)*
 
 # Features
 

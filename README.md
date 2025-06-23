@@ -1,12 +1,53 @@
-# React + Vite
+#  E-Commerce Cart System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern shopping cart built with React, Context API, and Clerk authentication. Features geolocation-based address auto-fill, persistent cart storage, and responsive design.
 
-Currently, two official plugins are available:
+![Demo Screenshot](./screenshots/cart-demo.png) *(Replace with your actual screenshot)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Features
 
-## Expanding the ESLint configuration
+- **Cart Management**  
+  ✅ Add/remove items | ✅ Adjust quantities | ✅ Real-time price calculation  
+- **User Authentication**  
+  🔒 Protected routes using [Clerk](https://clerk.com)  
+- **Geolocation**  
+  📍 Auto-fill delivery address via OpenStreetMap API  
+- **Persistent Storage**  
+  💾 Cart saved to `localStorage` (survives page refresh)  
+- **UI/UX**  
+  ✨ Toast notifications | 📱 Mobile-responsive | 🎨 Tailwind CSS  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+**Frontend**  
+- React 19 + Vite  
+- Tailwind CSS  
+- React Icons, Lottie Animations  
+
+**State Management**  
+- Context API + LocalStorage  
+
+**APIs & Services**  
+- Clerk (Authentication)  
+- OpenStreetMap (Geolocation)  
+- Axios (HTTP requests)  
+
+## Quick Start
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-username/ecommerce-cart.git
+   cd ecommerce-cart
+2. Install dependencies
+   bash
+   npm install
+3. Set up environment variables
+   Create a .env file:
+   env
+   VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
+4. Run the development server
+   bash
+   npm run dev
+
+   LIVE DEMO - https://cartora-ecommerce.vercel.app/
+   

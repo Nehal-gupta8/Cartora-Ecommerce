@@ -1,38 +1,43 @@
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useMemo, useCallback } from "react";
 
 export const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
-    const [data, setData] = useState()
+    const [data, setData] = useState();
 
-    // fetching all products from api
-    const fetchAllProducts = async () => {
+    const fetchAllProducts = useCallback(async () => {
         try {
-           const res = await axios.get('https://fakestoreapi.in/api/products?limit=150')
-           console.log(res);
-           const productsData = res.data.products
-           setData(productsData)
-           
+            const res = await axios.get('https://fakestoreapi.in/api/products?limit=150');
+            const productsData = res.data.products;
+            setData(productsData);
         } catch (error) {
             console.log(error);
-
         }
-    }
+    }, []);
 
-    const getUniqueCategory = (data, property) =>{
-        let newVal = data?.map((curElem) =>{
-            return curElem[property]
-        })
-        newVal = ["All",...new Set(newVal)]
-        return newVal
-      }
-    
-      const categoryOnlyData = getUniqueCategory(data, "category")
-      const brandOnlyData = getUniqueCategory(data, "brand")
-    return <DataContext.Provider value={{ data, setData,fetchAllProducts, categoryOnlyData, brandOnlyData }}>
-        {children}
-    </DataContext.Provider>
-}
+    const getUniqueCategory = (data, property) => {
+        let newVal = data?.map((curElem) => curElem[property]);
+        newVal = ["All", ...new Set(newVal)];
+        return newVal;
+    };
 
-export const getData = ()=> useContext(DataContext)
+    const categoryOnlyData = useMemo(() => getUniqueCategory(data, "category"), [data]);
+    const brandOnlyData = useMemo(() => getUniqueCategory(data, "brand"), [data]);
+
+    const value = useMemo(() => ({
+        data,
+        setData,
+        fetchAllProducts,
+        categoryOnlyData,
+        brandOnlyData
+    }), [data, fetchAllProducts, categoryOnlyData, brandOnlyData]);
+
+    return (
+        <DataContext.Provider value={value}>
+            {children}
+        </DataContext.Provider>
+    );
+};
+
+export const getData = () => useContext(DataContext);
